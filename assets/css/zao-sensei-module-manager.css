@@ -1,0 +1,92 @@
+/********************/
+/* GENERAL SETTINGS */
+/********************/
+
+.clear {
+    clear: both;
+}
+
+/********************/
+/* EXPANDABLE LIST  */
+/********************/
+.expList {
+    clear: both;
+    cursor: pointer;
+}
+
+.modhead {
+    padding: 0;
+    background: none;
+}
+.listControl{
+    margin-bottom: 5px;
+    float: right;
+    display: block;
+}
+
+.listControl a:hover {
+    color:#222222;
+    clear: both;
+    cursor: pointer;
+}
+
+/* Reduce spacing before and after modules  */
+.module .module-lessons {
+    margin: 1em 0 0;
+}
+
+.module {
+    padding-bottom: 1em;
+    margin-bottom: 1em !important;
+}
+
+/* Display Module title inline with toggle button */
+.module header h2 {
+    display: inline;
+    padding:0;
+}
+
+
+.lesson-length {
+    text-align: right;
+    float: right;
+    width: auto;
+    display: inline-block;
+}
+
+.lesson-title {
+    display: inline-block;
+    width: 80%;
+    height: 100%;
+}
+.module-title {
+    display: inline-block;
+    width: 80%;
+    height: 100%;
+}
+
+.tog-mod {
+    text-align: right;
+    float: right;
+    width: 20%;
+    display: inline-block;
+}
+
+.lessons-list p {
+    margin:0;
+}
+
+/* Display Module Status correctly */
+
+#main .course .module-status {
+    font-size: 18px!important;
+    font-weight: normal;
+    margin: -5px 1em 0!important;
+    vertical-align: middle;
+    position: inherit;
+}
+
+.module .module-lessons ul li a .preview-label {
+    clear: none;
+    margin-right:1em;
+}
