@@ -3,8 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * List the Course Modules and Lesson in these modules
  *
- * Template is hooked into Single Course sensei_single_main_content. It will
- * only be shown if the course contains modules.
+ * Template is hooked into Single Course sensei_single_main_content and in the custom widget.
  *
  * All lessons shown here will not be included in the list of other lessons.
  *
@@ -17,25 +16,40 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 <?php
 
-/**
- * Hook runs inside single-course/course-modules.php
- *
- * It runs before the modules are shown. This hook fires on the single course page. It will show
- * irrespective of irrespective the course has any modules or not.
- *
- * @since 1.8.0
- *
- */
 do_action( 'sensei_single_course_modules_before' );
 
+
+/**
+ * A more reliable function than sensei_module_has_lessons() which seems to duplicate the last module if it is used in the sidebar
+ * @return bool
+ */
+function qp_sensei_module_has_lessons() {
+	global $sensei_modules_loop;
+	if ( $sensei_modules_loop['current'] < 0 ) {
+		$index = 0;
+	} else {
+		$index = $sensei_modules_loop['current'];
+	}
+	if ( isset( $sensei_modules_loop['modules'][ $index ] ) ) {
+		// setup the query for the module lessons
+		$course_id = $sensei_modules_loop['course_id'];
+
+		$module_term_id = $sensei_modules_loop['modules'][ $index ] ->term_id;
+		$modules_query = Sensei()->modules->get_lessons_query( $course_id , $module_term_id );
+
+		if ( $modules_query->have_posts() ) {
+			return true;
+		}
+	}
+	return false;
+}
 ?>
 
 <?php if ( sensei_have_modules() ) : ?>
+	<?php while ( sensei_have_modules() ) :	sensei_setup_module(); ?>
+		<?php if ( qp_sensei_module_has_lessons() ) : ?>
 
-	<?php while ( sensei_have_modules() ) : sensei_setup_module(); ?>
-		<?php if ( sensei_module_has_lessons() ) : ?>
-
-			<article class="module">
+			<article class="module ">
 
 				<?php
 
@@ -188,11 +202,4 @@ do_action( 'sensei_single_course_modules_before' );
 
 <?php
 
-/**
- * Hook runs inside single-course/course-modules.php
- *
- * It runs after the modules are shown. This hook fires on the single course page,but only if the course has modules.
- *
- * @since 1.8.0
- */
 do_action( 'sensei_single_course_modules_after' );

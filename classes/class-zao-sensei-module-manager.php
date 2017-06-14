@@ -21,13 +21,13 @@ class Zao_Sensei_Module_Manager {
 		$this->taxonomy = 'collapse';
 		$this->order_page_slug = 'module-collapse';
 
-		// Enque CSS and JS scripts
+		// Enqueue CSS and JS scripts
 		add_action( 'sensei_single_course_modules_content', array( $this, 'enqueue_module_manager_scripts' ), 10 );
 
 		// Remove native Sensei module title and content display
-		add_action( 'sensei_single_course_modules_before', array( $this, 'mod_title_remove_action' ) ); // prioroty of 1, but can be anything higher (lower number) then the priority of the action
-		add_action( 'sensei_single_course_modules_content', array( $this, 'mod_content_remove_action' ) ); // prioroty of 1, but can be anything higher (lower number) then the priority of the action
-		add_action( 'sensei_single_course_content_inside_after', array( $this, 'mod_content_remove_action_new' ), 5 ); // prioroty of 1, but can be anything higher (lower number) then the priority of the action
+		add_action( 'sensei_single_course_modules_before', array( $this, 'mod_title_remove_action' ) ); // priority of 1, but can be anything higher (lower number) then the priority of the action
+		add_action( 'sensei_single_course_modules_content', array( $this, 'mod_content_remove_action' ) ); // priority of 1, but can be anything higher (lower number) then the priority of the action
+		add_action( 'sensei_single_course_content_inside_after', array( $this, 'mod_content_remove_action_new' ), 5 ); // priority of 1, but can be anything higher (lower number) then the priority of the action
 
 		// Add collapsible module content display Sensei < V1.9
 		add_action( 'sensei_single_course_modules_content', array( $this, 'course_module_manager_content' ), 20 );
@@ -37,9 +37,15 @@ class Zao_Sensei_Module_Manager {
 
 		// Add collapsible module title for all Sensei versions
 		add_action( 'sensei_single_course_modules_before', array( $this, 'course_modules_collapse_title' ), 21 );
+		
+		add_action( 'sensei_register_widgets', array( $this, 'register_custom_widgets' ) );
 
 	}
-
+	
+	public function register_custom_widgets() {
+		require_once 'class-zao-sensei-module-manager-widget.php';
+		register_widget( 'Zao_Sensei_Module_Manager_Widget' );
+	}
 	/**
 	 * Remove native Sensei modules title on single course page
 	 */

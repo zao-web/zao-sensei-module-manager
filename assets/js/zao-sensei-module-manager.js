@@ -34,17 +34,19 @@ $(function prepareList() {
     $('.expandList')
         .unbind('click')
         .click( function() {
-            $('.collapsed').parents('.module-lessons').find('.tog-mod').addClass('fa-chevron-up').removeClass('fa-chevron-down');
-            $('.collapsed').addClass('expanded').removeClass('collapsed');
-            $('.expanded').children('li').show('medium');
+            var $list = $(this).parents('.course-section.module-list');
+            $list.find('.collapsed').parents('.module-lessons').find('.tog-mod').addClass('fa-chevron-up').removeClass('fa-chevron-down');
+            $list.find('.collapsed').addClass('expanded').removeClass('collapsed');
+            $list.find('.expanded').children('li').show('medium');
 
         })
     $('.collapseList')
         .unbind('click')
         .click( function() {
-            $('.expanded').parents('.module-lessons').find('.tog-mod').addClass('fa-chevron-down').removeClass('fa-chevron-up');
-            $('.expanded').removeClass('expanded').addClass('collapsed');
-            $('.collapsed').children('li').hide('medium');
+            var $list = $(this).parents('.course-section.module-list');
+            $list.find('.expanded').parents('.module-lessons').find('.tog-mod').addClass('fa-chevron-down').removeClass('fa-chevron-up');
+            $list.find('.expanded').removeClass('expanded').addClass('collapsed');
+            $list.find('.collapsed').children('li').hide('medium');
 
         })
 
