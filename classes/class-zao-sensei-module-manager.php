@@ -94,7 +94,7 @@ class Zao_Sensei_Module_Manager {
 
 		}
 		// load collapsible Sensei template name if it exists in the users theme
-		require( ABSPATH . 'wp-content/plugins/zao-sensei-module-manager/templates/collapse-modules.php' );
+		require( ABSPATH . 'wp-content/plugins/Zao-Sensei-Module-Manager/templates/collapse-modules.php' );
 
 	} // end course_module_content
 

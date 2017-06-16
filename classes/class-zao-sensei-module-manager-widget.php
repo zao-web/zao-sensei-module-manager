@@ -105,7 +105,7 @@ class Zao_Sensei_Module_Manager_Widget extends WP_Widget {
     public function do_modules() {
 	    
     	// Load up the modules template(same one we use on the course landing page)
-    	require( ABSPATH . 'wp-content/plugins/zao-sensei-module-manager/templates/collapse-modules.php' );
+    	require( ABSPATH . 'wp-content/plugins/Zao-Sensei-Module-Manager/templates/collapse-modules.php' );
     	
     }
 
